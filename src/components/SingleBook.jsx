@@ -18,4 +18,3 @@ class SingleBook extends Component {
 }
 
 export default SingleBook
-ss
