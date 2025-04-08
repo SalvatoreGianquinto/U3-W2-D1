@@ -1,25 +1,24 @@
-import { Button, ListGroup } from 'react-bootstrap'
+import { Button, ListGroup } from "react-bootstrap"
 
 const SingleComment = ({ comment }) => {
-  const deleteComment = async (asin) => {
-    try {
-      let response = await fetch(
-        'https://striveschool-api.herokuapp.com/api/comments/' + asin,
-        {
-          method: 'DELETE',
-          headers: {
-            Authorization: 'Bearer inserisci-qui-il-tuo-token',
-          },
+  const deleteComment = (asin) => {
+    fetch("https://striveschool-api.herokuapp.com/api/comments/" + asin, {
+      method: "DELETE",
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Y1MDJjYTgxYjBkZDAwMTUwYTdhNTQiLCJpYXQiOjE3NDQxMTAyODIsImV4cCI6MTc0NTMxOTg4Mn0.aLDydVwpeWSKRw24W6V_IKX4Xbit998D6MN9bd1qrVk",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("La recensione è stata eliminata!")
+        } else {
+          throw new Error("La recensione non è stata eliminata!")
         }
-      )
-      if (response.ok) {
-        alert('La recensione è stata elimata!')
-      } else {
-        throw new Error('La recensione non è stata eliminata!')
-      }
-    } catch (error) {
-      alert(error)
-    }
+      })
+      .catch((error) => {
+        alert(error)
+      })
   }
 
   return (

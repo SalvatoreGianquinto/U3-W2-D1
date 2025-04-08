@@ -7,38 +7,34 @@ import { Container, Row, Col } from "react-bootstrap"
 import BookList from "./components/BookList"
 import CommentArea from "./components/CommentArea"
 import fantasy from "./data/fantasy.json"
-import { Component } from "react"
+import { useState } from "react"
 
-class App extends Component {
-  state = {
-    selectedAsin: null, //non selezioniamo nessun libro
-  }
+const App = function () {
+  const [selectedAsin, setSelectedAsin] = useState(null)
 
   //Questa funzione serve per dire: "quando qualcuno clicca su un libro, ricordati qual è stato selezionato".
-  handleBookSelect = (asin) => {
-    this.setState({ selectedAsin: asin })
+  const handleBookSelect = (asin) => {
+    setSelectedAsin(asin)
   }
 
-  render() {
-    return (
-      <>
-        <MyNav />
-        <Container>
-          <Welcome />
-          <Row className="mt-4">
-            <Col md={8}>
-              <BookList books={fantasy} onBookSelect={this.handleBookSelect} />{" "}
-              {/* passiamo la funzione come prop*/}
-            </Col>
-            <Col md={4}>
-              <CommentArea asin={this.state.selectedAsin} />
-            </Col>
-          </Row>
-        </Container>
-        <MyFooter />
-      </>
-    )
-  }
+  return (
+    <>
+      <MyNav />
+      <Container>
+        <Welcome />
+        <Row className="mt-4">
+          <Col md={8}>
+            <BookList books={fantasy} onBookSelect={handleBookSelect} />{" "}
+            {/* passiamo la funzione come prop*/}
+          </Col>
+          <Col md={4}>
+            <CommentArea asin={selectedAsin} />
+          </Col>
+        </Row>
+      </Container>
+      <MyFooter />
+    </>
+  )
 }
 
 export default App
